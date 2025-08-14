@@ -106,7 +106,7 @@ export function OpeningStatus() {
               </div>
             ) : (
               <div className="text-sm bg-gray-50 p-4 rounded-lg">
-                <p className="font-medium mb-3 text-[#121619]">Horaires d'ouverture :</p>
+                <p className="font-medium mb-3 text-[#121619]">Horaires d&apos;ouverture :</p>
                 <div className="max-w-xs mx-auto">
                   <OpeningHoursDisplay variant="detailed" textColor="text-[#121619]" />
                 </div>

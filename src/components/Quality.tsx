@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card"
 import { Award, Leaf, Clock, Heart } from "lucide-react"
 
@@ -31,7 +32,7 @@ export function Quality() {
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-[#121619] mb-4">Notre Engagement</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Nous nous engageons à vous offrir une expérience culinaire d'exception avec des produits de qualité
+            Nous nous engageons à vous offrir une expérience culinaire d&apos;exception avec des produits de qualité
           </p>
         </div>
 
@@ -55,21 +56,24 @@ export function Quality() {
         <div className="bg-white rounded-lg p-8 border border-gray-200 shadow-lg">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div>
-              <h3 className="text-2xl font-bold text-[#121619] mb-4">L'Art de la Pizza Authentique</h3>
+              <h3 className="text-2xl font-bold text-[#121619] mb-4">L&apos;Art de la Pizza Authentique</h3>
               <p className="text-gray-600 mb-4">
-                Chez L'Omnibus, nous perpétuons la tradition italienne avec des techniques artisanales transmises de
+                Chez L&apos;Omnibus, nous perpétuons la tradition italienne avec des techniques artisanales transmises de
                 génération en génération. Notre four à bois cuit nos pizzas à la perfection.
               </p>
               <p className="text-gray-600">
                 Chaque pizza raconte une histoire, celle de notre passion pour la gastronomie italienne et notre
-                engagement envers l'excellence culinaire.
+                engagement envers l&apos;excellence culinaire.
               </p>
             </div>
             <div className="relative">
-              <img
+              <Image
                 src="/images/pizza-banner.png"
                 alt="Pizza L'Omnibus"
+                width={800}
+                height={256}
                 className="w-full h-64 object-cover rounded-lg"
+                style={{ width: '100%', height: 'auto' }}
               />
             </div>
           </div>

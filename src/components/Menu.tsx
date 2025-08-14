@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const menuCategories = [
@@ -242,10 +243,14 @@ export function Menu() {
                   className="bg-zinc-100 border-slate-300 hover:border-red-500 transition-colors shadow-lg hover:shadow-xl"
                 >
                   <div className="relative">
-                    <img
+                    <Image
                       src={item.image || "/images/pizza-banner.png"}
                       alt={item.name}
+                      width={500}
+                      height={192}
                       className="w-full h-40 md:h-48 object-cover rounded-t-lg"
+                      style={{ width: '100%', height: 'auto' }}
+                      priority
                     />
                     {item.special && (
                       <Badge className="absolute top-2 right-2 bg-red-500 text-white text-xs">Spécialité</Badge>

@@ -11,7 +11,7 @@ export function Contact() {
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-foreground mb-4">Nous Contacter</h2>
           <p className="text-xl text-foreground/80">
-            Une question ? Une réservation ? N'hésitez pas à nous contacter !
+            Une question ? Une réservation ? N&apos;hésitez pas à nous contacter !
           </p>
         </div>
 

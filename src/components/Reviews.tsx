@@ -112,7 +112,7 @@ export function Reviews() {
             <span className="text-xl font-semibold text-foreground">4.7/5</span>
             <span className="text-foreground/60">(+770 avis)</span>
           </div>
-          <p className="text-xl text-foreground/80">Découvrez ce que nos clients pensent de L'ombinus</p>
+          <p className="text-xl text-foreground/80">Découvrez ce que nos clients pensent de L&apos;ombinus</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

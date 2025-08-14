@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react"
 import { OpeningHoursDisplay } from "@/components/Opening-hours-display"
 
@@ -9,9 +10,15 @@ export function Footer() {
           {/* Logo et description */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <img src="/images/logo-complete.png" alt="L'ombinus Logo" className="h-16 w-16 object-contain" />
+              <Image
+                src="/images/logo-complete.png"
+                alt="L'Omnibus Logo"
+                width={64}  // h-16 / w-16 = 64px
+                height={64}
+                className="h-16 w-16 object-contain"
+              />
               <div>
-                <h3 className="text-xl font-bold text-foreground">L'ombinus</h3>
+                <h3 className="text-xl font-bold text-foreground">L&apos;ombinus</h3>
                 <p className="text-sm text-foreground/60">Pizzeria</p>
               </div>
             </div>
@@ -75,7 +82,7 @@ export function Footer() {
 
         <div className="border-t border-primary/20 mt-8 pt-8 text-center">
           <p className="text-foreground/60">
-            © 2024 Pizzeria L'ombinus. Tous droits réservés. |
+            © 2024 Pizzeria L&apos;ombinus. Tous droits réservés. |
             <a href="#" className="hover:text-primary transition-colors ml-1">
               Mentions légales
             </a>{" "}

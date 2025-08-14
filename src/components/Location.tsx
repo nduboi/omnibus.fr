@@ -69,6 +69,7 @@ export function Location() {
           )
           .addTo(map.current)
       } catch (error) {
+        console.error("Error initializing Mapbox:", error)
         setMapError(true)
         setMapLoading(false)
       }
@@ -98,7 +99,7 @@ export function Location() {
                 <MapPin className="h-8 w-8 md:h-12 md:w-12 text-primary mb-3 md:mb-4" />
                 <h3 className="text-base md:text-lg font-semibold mb-2">Carte non disponible</h3>
                 <p className="text-xs md:text-sm text-gray-600 mb-3 md:mb-4">
-                  La carte interactive n'est pas disponible pour le moment.
+                  La carte interactive n&apos;est pas disponible pour le moment.
                 </p>
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
@@ -135,7 +136,7 @@ export function Location() {
               </CardHeader>
               <CardContent className="pt-0">
                 <p className="text-card-foreground/80 text-sm md:text-base leading-relaxed">
-                  L'Omnibus Bar-Restaurant-Pizzeria
+                  L&apos;Omnibus Bar-Restaurant-Pizzeria
                   <br />1 bis Rue de la Gare
                   <br />
                   85110 Chantonnay
@@ -158,7 +159,7 @@ export function Location() {
               <CardHeader className="pb-3 md:pb-4">
                 <CardTitle className="flex items-center gap-2 text-card-foreground text-base md:text-lg">
                   <Clock className="h-4 w-4 md:h-5 md:w-5 text-primary" />
-                  Horaires d'ouverture
+                  Horaires d&apos;ouverture
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">

@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { Button } from "@/components/ui/button"
 
 export function Hero() {
@@ -14,12 +15,19 @@ export function Hero() {
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#121619] to-[#303030]">
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <div className="flex justify-center mb-6 md:mb-8">
-          <img src="/images/logo-complete.png" alt="L'Omnibus" className="h-32 w-32 md:h-48 md:w-48 object-contain" />
+          <Image
+            src="/images/logo-complete.png"
+            alt="L'Omnibus"
+            width={192} // md:w-48 = 12rem = 192px
+            height={192} // md:h-48 = 12rem = 192px
+            className="h-32 w-32 md:h-48 md:w-48 object-contain"
+            priority
+          />
         </div>
 
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6">
           Bienvenue chez
-          <span className="block text-red-500">L'Omnibus</span>
+          <span className="block text-red-500">L&apos;Omnibus</span>
         </h1>
 
         <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-6 md:mb-8 max-w-2xl mx-auto px-2">

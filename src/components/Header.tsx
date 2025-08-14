@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
@@ -21,8 +22,14 @@ export function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <img src="/images/logo-complete.png" alt="L'Omnibus Logo" className="h-16 w-16 object-contain" />
-          </div>
+          <Image
+            src="/images/logo-complete.png"
+            alt="L'Omnibus Logo"
+            width={64}  // h-16/w-16 = 4rem = 64px
+            height={64}
+            className="h-16 w-16 object-contain"
+          />
+        </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
