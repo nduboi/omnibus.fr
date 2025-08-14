@@ -7,7 +7,18 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-const menuCategories = [
+const menuCategories : Array<{
+  name: string;
+  description: string;
+  items: Array<{
+    name: string;
+    description: string;
+    price: string;
+    image: string;
+    special?: boolean;
+    ephemeral?: boolean;
+  }>
+}> = [
   {
     name: "Pizzas Classiques",
     description: "Découvrez nos pizzas artisanales préparées avec des ingrédients frais et de qualité",
