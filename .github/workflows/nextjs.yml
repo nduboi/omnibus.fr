@@ -31,6 +31,13 @@ jobs:
     env:
       NEXT_PUBLIC_MAPBOX_TOKEN: ${{ secrets.NEXT_PUBLIC_MAPBOX_TOKEN }}
     steps:
+      - name: checkToken
+        run: |
+          if [ -z "${{ secrets.NEXT_PUBLIC_MAPBOX_TOKEN }}" ]; then
+            echo "NEXT_PUBLIC_MAPBOX_TOKEN is not set. Please set it in the repository secrets."
+            exit 1
+          fi
+          echo "NEXT_PUBLIC_MAPBOX_TOKEN is set."
       - name: Checkout
         uses: actions/checkout@v4
       - name: Detect package manager
@@ -92,6 +99,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: checkToken
+        run: |
+          if [ -z "${{ secrets.NEXT_PUBLIC_MAPBOX_TOKEN }}" ]; then
+            echo "NEXT_PUBLIC_MAPBOX_TOKEN is not set. Please set it in the repository secrets."
+            exit 1
+          fi
+          echo "NEXT_PUBLIC_MAPBOX_TOKEN is set."
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
