@@ -4,162 +4,53 @@ import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react"
-
-const menuCategories : Array<{
-  name: string;
-  description: string;
-  items: Array<{
-    name: string;
-    description: string;
-    price: string;
-    image: string;
-    special?: boolean;
-    ephemeral?: boolean;
-  }>
-}> = [
-  {
-    name: "Pizzas Classiques",
-    description: "Découvrez nos pizzas artisanales préparées avec des ingrédients frais et de qualité",
-    items: [
-      {
-        name: "Margherita Express",
-        description: "Tomate, mozzarella, basilic frais - Le voyage commence ici",
-        price: "12€",
-        image: "/images/pizza-banner.png",
-      },
-      {
-        name: "Locomotive Pepperoni",
-        description: "Tomate, mozzarella, pepperoni, origan",
-        price: "14€",
-        image: "/images/pizza-banner.png",
-      },
-      {
-        name: "Wagon Quatre Fromages",
-        description: "Mozzarella, gorgonzola, parmesan, chèvre",
-        price: "15€",
-        image: "/images/pizza-banner.png",
-      },
-      {
-        name: "Regina du Rail",
-        description: "Tomate, mozzarella, jambon, champignons",
-        price: "14€",
-        image: "/images/pizza-banner.png",
-      },
-      {
-        name: "Napolitaine Express",
-        description: "Tomate, mozzarella, anchois, olives, câpres",
-        price: "15€",
-        image: "/images/pizza-banner.png",
-      },
-    ],
-  },
-  {
-    name: "Spécialités L'Omnibus",
-    description: "Découvrez nos pizzas artisanales préparées avec des ingrédients frais et de qualité",
-    items: [
-      {
-        name: "Orient Express",
-        description: "Tomate, mozzarella, jambon de Parme, roquette, tomates cerises",
-        price: "17€",
-        image: "/images/pizza-banner.png",
-        special: true,
-      },
-      {
-        name: "Trans-Alpin",
-        description: "Crème fraîche, mozzarella, saumon fumé, aneth, câpres",
-        price: "19€",
-        image: "/images/pizza-banner.png",
-        special: true,
-      },
-      {
-        name: "Cargo Végétarien",
-        description: "Tomate, mozzarella, courgettes, aubergines, poivrons, olives",
-        price: "16€",
-        image: "/images/pizza-banner.png",
-      },
-      {
-        name: "Locomotive Spicy",
-        description: "Tomate, mozzarella, chorizo, poivrons, piment d'Espelette",
-        price: "16€",
-        image: "/images/pizza-banner.png",
-        special: true,
-      },
-    ],
-  },
-  {
-    name: "Pâtes du Chef",
-    description: "Découvrez nos pâtes préparées avec des ingrédients frais et de qualité",
-    items: [
-      {
-        name: "Carbonara du Conducteur",
-        description: "Spaghettis, lardons, œuf, parmesan, crème fraîche",
-        price: "13€",
-        image: "/images/pizza-banner.png",
-      },
-      {
-        name: "Bolognaise Express",
-        description: "Tagliatelles, sauce bolognaise maison, parmesan",
-        price: "12€",
-        image: "/images/pizza-banner.png",
-      },
-      {
-        name: "Penne all'Arrabbiata",
-        description: "Penne, tomates, ail, piment, basilic",
-        price: "11€",
-        image: "/images/pizza-banner.png",
-      },
-      {
-        name: "Lasagnes du Wagon",
-        description: "Lasagnes maison, bœuf, béchamel, mozzarella",
-        price: "14€",
-        image: "/images/pizza-banner.png",
-      },
-    ],
-  },
-  {
-    name: "Plats Éphémères",
-    description: "Découvrez nos créations temporaires préparées avec des ingrédients frais et de qualité",
-    items: [
-      {
-        name: "Pizza du Mois",
-        description: "Création unique du chef - Demandez-nous !",
-        price: "18€",
-        image: "/images/pizza-banner.png",
-        special: true,
-        ephemeral: true,
-      },
-      {
-        name: "Risotto de Saison",
-        description: "Risotto aux légumes de saison et parmesan",
-        price: "15€",
-        image: "/images/pizza-banner.png",
-        ephemeral: true,
-      },
-      {
-        name: "Suggestion du Chef",
-        description: "Plat surprise selon l'inspiration du moment",
-        price: "16€",
-        image: "/images/pizza-banner.png",
-        ephemeral: true,
-      },
-    ],
-  },
-]
+import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
+import { useCategories } from "@/hooks/use-firebase-data"
 
 export function Menu() {
+  const { categories, loading, error } = useCategories()
   const [activeCategory, setActiveCategory] = useState(0)
   const [currentItemIndex, setCurrentItemIndex] = useState(0)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  const currentCategory = menuCategories[activeCategory]
+  if (loading) {
+    return (
+      <section id="menu" className="py-8 md:py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#121619] mb-4">Notre Menu</h2>
+          </div>
+          <div className="flex items-center justify-center py-12">
+            <Loader2 className="h-8 w-8 animate-spin text-red-500" />
+            <span className="ml-2 text-gray-600">Chargement du menu...</span>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  if (error || categories.length === 0) {
+    return (
+      <section id="menu" className="py-8 md:py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#121619] mb-4">Notre Menu</h2>
+          </div>
+          <div className="text-center py-12">
+            <p className="text-gray-600">{error || "Aucune catégorie disponible pour le moment."}</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  const currentCategory = categories[activeCategory]
   const itemsPerPage = 3
-  const totalPages = Math.ceil(currentCategory.items.length / itemsPerPage)
-  const currentItems = currentCategory.items.slice(currentItemIndex, currentItemIndex + itemsPerPage)
+  const totalPages = Math.ceil(currentCategory.menuItems.length / itemsPerPage)
+  const currentItems = currentCategory.menuItems.slice(currentItemIndex, currentItemIndex + itemsPerPage)
 
   const nextItems = () => {
-    if (currentItemIndex + itemsPerPage < currentCategory.items.length) {
+    if (currentItemIndex + itemsPerPage < currentCategory.menuItems.length) {
       setCurrentItemIndex(currentItemIndex + itemsPerPage)
     }
   }
@@ -176,12 +67,25 @@ export function Menu() {
     setIsMobileMenuOpen(false)
   }
 
+  const getCategoryDescription = (categoryName: string) => {
+    if (categoryName.toLowerCase().includes("pizza")) {
+      return "Découvrez nos pizzas artisanales préparées avec des ingrédients frais et de qualité"
+    } else if (categoryName.toLowerCase().includes("pâte")) {
+      return "Découvrez nos pâtes préparées avec des ingrédients frais et de qualité"
+    } else if (categoryName.toLowerCase().includes("éphémère")) {
+      return "Découvrez nos créations temporaires préparées avec des ingrédients frais et de qualité"
+    }
+    return "Découvrez nos spécialités préparées avec des ingrédients frais et de qualité"
+  }
+
   return (
     <section id="menu" className="py-8 md:py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-[#121619] mb-4">Notre Menu</h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">{currentCategory.description}</p>
+          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
+            {getCategoryDescription(currentCategory.name)}
+          </p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-4 md:gap-8">
@@ -201,9 +105,9 @@ export function Menu() {
             >
               <h3 className="text-white font-semibold mb-4 hidden lg:block">Catégories</h3>
               <div className="space-y-2">
-                {menuCategories.map((category, index) => (
+                {categories.map((category, index) => (
                   <button
-                    key={index}
+                    key={category.id}
                     onClick={() => handleCategoryChange(index)}
                     className={`w-full text-left p-3 rounded-lg transition-colors text-sm md:text-base ${
                       activeCategory === index
@@ -239,7 +143,7 @@ export function Menu() {
                   variant="outline"
                   size="sm"
                   onClick={nextItems}
-                  disabled={currentItemIndex + itemsPerPage >= currentCategory.items.length}
+                  disabled={currentItemIndex + itemsPerPage >= currentCategory.menuItems.length}
                   className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
                 >
                   <ChevronRight className="h-4 w-4" />
@@ -248,25 +152,18 @@ export function Menu() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {currentItems.map((item, itemIndex) => (
+              {currentItems.map((item) => (
                 <Card
-                  key={itemIndex}
+                  key={item.id}
                   className="bg-zinc-100 border-slate-300 hover:border-red-500 transition-colors shadow-lg hover:shadow-xl"
                 >
                   <div className="relative">
-                    <Image
-                      src={item.image || "/images/pizza-banner.png"}
+                    <img
+                      src={item.imageUrl || "/images/pizza-banner.png"}
                       alt={item.name}
-                      width={500}
-                      height={192}
                       className="w-full h-40 md:h-48 object-cover rounded-t-lg"
-                      style={{ width: '100%', height: 'auto' }}
-                      priority
                     />
-                    {item.special && (
-                      <Badge className="absolute top-2 right-2 bg-red-500 text-white text-xs">Spécialité</Badge>
-                    )}
-                    {item.ephemeral && (
+                    {currentCategory.name.toLowerCase().includes("éphémère") && (
                       <Badge className="absolute top-2 left-2 bg-orange-500 text-white text-xs">Éphémère</Badge>
                     )}
                   </div>
@@ -274,7 +171,7 @@ export function Menu() {
                   <CardHeader className="p-3 md:p-4">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                       <CardTitle className="text-slate-800 text-base md:text-lg leading-tight">{item.name}</CardTitle>
-                      <span className="text-lg md:text-xl font-bold text-red-500 shrink-0">{item.price}</span>
+                      <span className="text-lg md:text-xl font-bold text-red-500 shrink-0">{item.price}€</span>
                     </div>
                   </CardHeader>
 

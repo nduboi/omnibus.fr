@@ -93,7 +93,7 @@ function ReviewCard({ review, index }: { review: (typeof reviews)[0]; index: num
 }
 
 export function Reviews() {
-  const averageRating = 4.7
+  const averageRating = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
 
   return (
     <section id="reviews" className="py-16 bg-background">
@@ -109,8 +109,8 @@ export function Reviews() {
                 />
               ))}
             </div>
-            <span className="text-xl font-semibold text-foreground">4.7/5</span>
-            <span className="text-foreground/60">(+770 avis)</span>
+            <span className="text-xl font-semibold text-foreground">{averageRating.toFixed(1)}/5</span>
+            <span className="text-foreground/60">({reviews.length} avis)</span>
           </div>
           <p className="text-xl text-foreground/80">Découvrez ce que nos clients pensent de L&apos;ombinus</p>
         </div>

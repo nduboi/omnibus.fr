@@ -5,7 +5,7 @@ import { MapPin, Navigation, Clock, ExternalLink } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import mapboxgl from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
-import { OpeningHoursDisplay } from "@/components/Opening-hours-display"
+import { OpeningHoursDisplay } from "./Opening-hours-display"
 
 export function Location() {
   const mapContainer = useRef<HTMLDivElement>(null)
@@ -13,9 +13,9 @@ export function Location() {
   const [mapError, setMapError] = useState(false)
   const [mapLoading, setMapLoading] = useState(true)
 
-  const longitude = -1.0540035
-  const latitude = 46.6896117
-  const address = "L'Omnibus Bar-restaurant-pizzeria, 85110 Chantonnay"
+  const longitude = -1.054537
+  const latitude = 46.690124
+  const address = "1 bis Rue de la Gare, 85110 Chantonnay"
 
   useEffect(() => {
     if (map.current) return // Initialize map only once
@@ -69,7 +69,6 @@ export function Location() {
           )
           .addTo(map.current)
       } catch (error) {
-        console.error("Error initializing Mapbox:", error)
         setMapError(true)
         setMapLoading(false)
       }
@@ -178,6 +177,9 @@ export function Location() {
                 <div className="space-y-2 text-card-foreground/80 text-sm md:text-base">
                   <p>
                     <strong>Voiture :</strong> Parking gratuit disponible
+                  </p>
+                  <p>
+                    <strong>Train :</strong> Gare SNCF de Chantonnay à proximité
                   </p>
                   <p>
                     <strong>Centre-ville :</strong> À 2 minutes à pied

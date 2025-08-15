@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card"
 import { Award, Leaf, Clock, Heart } from "lucide-react"
 
@@ -67,13 +66,10 @@ export function Quality() {
               </p>
             </div>
             <div className="relative">
-              <Image
+              <img
                 src="/images/pizza-banner.png"
                 alt="Pizza L'Omnibus"
-                width={800}
-                height={256}
                 className="w-full h-64 object-cover rounded-lg"
-                style={{ width: '100%', height: 'auto' }}
               />
             </div>
           </div>

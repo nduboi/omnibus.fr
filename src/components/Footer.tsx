@@ -1,8 +1,13 @@
-import Image from "next/image";
-import { Phone, Mail, MapPin } from "lucide-react"
-import { OpeningHoursDisplay } from "@/components/Opening-hours-display"
+"use client"
+
+import { Phone, Mail, MapPin, AlertTriangle } from "lucide-react"
+import { OpeningHoursDisplay } from "./Opening-hours-display"
+import { useVacations } from "@/hooks/use-firebase-data"
 
 export function Footer() {
+  const { vacationSettings, isOnVacation } = useVacations()
+  const currentVacation = vacationSettings?.periods.find(period => period.isActive) || null
+
   return (
     <footer className="bg-secondary border-t border-primary py-12">
       <div className="container mx-auto px-4">
@@ -10,13 +15,7 @@ export function Footer() {
           {/* Logo et description */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <Image
-                src="/images/logo-complete.png"
-                alt="L'Omnibus Logo"
-                width={64}  // h-16 / w-16 = 64px
-                height={64}
-                className="h-16 w-16 object-contain"
-              />
+              <img src="/images/logo-complete.png" alt="L'ombinus Logo" className="h-16 w-16 object-contain" />
               <div>
                 <h3 className="text-xl font-bold text-foreground">L&apos;ombinus</h3>
                 <p className="text-sm text-foreground/60">Pizzeria</p>
@@ -26,6 +25,20 @@ export function Footer() {
               Découvrez nos pizzas artisanales et pâtes préparées avec des ingrédients frais et de qualité dans un cadre
               ferroviaire unique.
             </p>
+
+            {isOnVacation && currentVacation && (
+              <div className="bg-yellow-100 border border-yellow-300 rounded-lg p-3 mb-4">
+                <div className="flex items-center gap-2">
+                  <AlertTriangle className="h-4 w-4 text-yellow-600" />
+                  <span className="text-yellow-800 font-medium text-sm">{currentVacation.reason}</span>
+                </div>
+                <p className="text-yellow-700 text-xs mt-1">
+                  Du {new Date(currentVacation.startDate).toLocaleDateString("fr-FR")} au{" "}
+                  {new Date(currentVacation.endDate).toLocaleDateString("fr-FR")}
+                </p>
+              </div>
+            )}
+
             <div className="flex gap-4">
               <a
                 href="https://www.facebook.com/lomnibus85/?locale=fr_FR"
@@ -76,7 +89,16 @@ export function Footer() {
           {/* Horaires */}
           <div>
             <h4 className="text-lg font-semibold text-foreground mb-4">Horaires</h4>
-            <OpeningHoursDisplay variant="compact" textColor="text-foreground/80" />
+            {isOnVacation ? (
+              <div className="text-center py-4">
+                <p className="text-red-500 font-medium">Fermé pour vacances</p>
+                <p className="text-foreground/60 text-sm mt-1">
+                  Retour le {new Date(currentVacation?.endDate || "").toLocaleDateString("fr-FR")}
+                </p>
+              </div>
+            ) : (
+              <OpeningHoursDisplay variant="compact" textColor="text-foreground/80" />
+            )}
           </div>
         </div>
 

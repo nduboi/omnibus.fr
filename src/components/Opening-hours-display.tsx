@@ -1,15 +1,10 @@
 "use client"
 
-// Configuration des horaires (à synchroniser avec opening-status.tsx)
-const OPENING_HOURS = {
-  monday: { morning: [12.0, 14.0], evening: [19.0, 21.5] },
-  tuesday: { morning: [12.0, 14.0], evening: [19.0, 21.5] },
-  wednesday: null, // Fermé
-  thursday: { morning: [12.0, 14.0], evening: [19.0, 21.5] },
-  friday: { morning: [12.0, 14.0], evening: [19.0, 21.5] },
-  saturday: { morning: null, evening: [19.0, 21.5] },
-  sunday: { morning: [12.0, 14.0], evening: [19.0, 21.5] },
-}
+import { useOpeningHours } from "@/hooks/use-firebase-data"
+import { Loader2 } from "lucide-react"
+import type { DaySchedule } from "@/lib/firebase-service"
+
+const DAYS_ORDER = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"] as const
 
 const DAYS_FR = {
   monday: "Lundi",
@@ -21,21 +16,22 @@ const DAYS_FR = {
   sunday: "Dimanche",
 }
 
-function formatTime(decimalTime: number): string {
-  const hours = Math.floor(decimalTime)
-  const minutes = Math.round((decimalTime - hours) * 60)
-  return `${hours}h${minutes.toString().padStart(2, "0")}`
-}
-
-function formatDayHours(hours: any): string {
-  if (!hours) return "Fermé"
+function formatDayHours(daySchedule: DaySchedule): string {
+  if (!daySchedule.isOpen || !daySchedule.openTime || !daySchedule.closeTime) {
+    return "Fermé"
+  }
 
   const parts = []
-  if (hours.morning) {
-    parts.push(`${formatTime(hours.morning[0])}-${formatTime(hours.morning[1])}`)
-  }
-  if (hours.evening) {
-    parts.push(`${formatTime(hours.evening[0])}-${formatTime(hours.evening[1])}`)
+
+  // Check if there's a break period
+  if (daySchedule.breakStart && daySchedule.breakEnd) {
+    // Morning service
+    parts.push(`${daySchedule.openTime} - ${daySchedule.breakStart}`)
+    // Evening service
+    parts.push(`${daySchedule.breakEnd} - ${daySchedule.closeTime}`)
+  } else {
+    // Continuous service
+    parts.push(`${daySchedule.openTime} - ${daySchedule.closeTime}`)
   }
 
   return parts.join(" • ")
@@ -43,19 +39,41 @@ function formatDayHours(hours: any): string {
 
 interface OpeningHoursDisplayProps {
   variant?: "detailed" | "compact"
-  textColor?: string // Ajout de la prop textColor pour personnaliser la couleur du texte
+  textColor?: string
 }
 
 export function OpeningHoursDisplay({ variant = "detailed", textColor = "text-foreground" }: OpeningHoursDisplayProps) {
+  const { openingHours, loading, error } = useOpeningHours()
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-4">
+        <Loader2 className="h-4 w-4 animate-spin text-red-500" />
+        <span className="ml-2 text-sm text-gray-600">Chargement...</span>
+      </div>
+    )
+  }
+
+  if (error || !openingHours) {
+    return (
+      <div className="text-center py-4">
+        <p className="text-sm text-gray-600">{error || "Horaires non disponibles"}</p>
+      </div>
+    )
+  }
+
   const groupedHours = new Map<string, string[]>()
 
-  Object.entries(OPENING_HOURS).forEach(([day, hours]) => {
-    const key = formatDayHours(hours)
+  DAYS_ORDER.forEach((day) => {
+    const daySchedule = openingHours[day]
+    if (daySchedule) {
+      const key = formatDayHours(daySchedule)
 
-    if (!groupedHours.has(key)) {
-      groupedHours.set(key, [])
+      if (!groupedHours.has(key)) {
+        groupedHours.set(key, [])
+      }
+      groupedHours.get(key)!.push(DAYS_FR[day])
     }
-    groupedHours.get(key)!.push(DAYS_FR[day as keyof typeof DAYS_FR])
   })
 
   if (variant === "compact") {
