@@ -21,13 +21,16 @@ const bowlbyOne = Bowlby_One({
 export const metadata: Metadata = {
   title: "Omnibus",
   description: "Bienvenu(e) à l'Omnibus",
+  icons: {
+    icon: "/favicon.ico?favicon.48e434e3.ico",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body
