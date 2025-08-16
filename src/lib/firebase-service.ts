@@ -11,7 +11,7 @@ export interface MenuItem {
   imageUrl: string
   available: boolean
   category: string
-  badge?: string[] // Champ badge comme array de strings
+  badges?: string[] // Champ badge comme array de strings
 }
 
 export interface Category {
@@ -76,7 +76,7 @@ const FALLBACK_CATEGORIES: Category[] = [
         imageUrl: "/images/pizza-banner.png",
         available: true,
         category: "Pizzas du Moment",
-        badge: ["vegetarian", "local"], // Ajout de badges d'exemple
+        badges: ["vegetarian", "local"], // Ajout de badges d'exemple
       },
       {
         id: "4-fromages",
@@ -87,7 +87,7 @@ const FALLBACK_CATEGORIES: Category[] = [
         imageUrl: "/images/pizza-banner.png",
         available: true,
         category: "Pizzas du Moment",
-        badge: ["vegetarian", "local", "new_recipe"], // Exemple de badges multiples
+        badges: ["vegetarian", "local", "new_recipe"], // Exemple de badges multiples
       },
     ],
   },
