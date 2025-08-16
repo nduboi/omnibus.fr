@@ -213,7 +213,7 @@ export function Menu() {
                       return (
                         <Card
                           key={item.id}
-                          className="bg-zinc-100 border-slate-300 hover:border-red-500 transition-colors shadow-lg hover:shadow-xl min-w-[220px] max-w-[220px] h-[320px] flex-shrink-0 snap-start flex flex-col"
+                          className="bg-zinc-100 border-slate-300 hover:border-red-500 transition-colors shadow-lg hover:shadow-xl min-w-[250px] max-w-[250px] h-[400px] flex-shrink-0 snap-start flex flex-col"
                         >
                           <div className="relative flex-shrink-0">
                             <img
@@ -236,7 +236,7 @@ export function Menu() {
                             )}
                           </div>
 
-                          <CardHeader className="p-3 flex-shrink-0">
+                          <CardHeader className="p-3 pb-0 flex-shrink-0">
                             <div className="flex justify-between items-start gap-2">
                               <CardTitle className="text-slate-800 text-base leading-tight">{item.name}</CardTitle>
                               <span className="text-lg font-bold text-red-500 shrink-0">{formatPrice(item.price)}€</span>
@@ -244,11 +244,11 @@ export function Menu() {
                           </CardHeader>
 
                           <CardContent className="p-3 pt-0 flex-1 overflow-y-auto">
-                            <div className="space-y-2">
+                            <div>
                               <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
 
                               {item.ingredients && item.ingredients.length > 0 && (
-                                <div>
+                                <div className="mt-2">
                                   <p className="text-xs text-slate-500 italic">{item.ingredients.join(", ")}</p>
                                 </div>
                               )}
