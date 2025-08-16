@@ -13,9 +13,9 @@ export function Location() {
   const [mapError, setMapError] = useState(false)
   const [mapLoading, setMapLoading] = useState(true)
 
-  const longitude = -1.054537
-  const latitude = 46.690124
-  const address = "1 bis Rue de la Gare, 85110 Chantonnay"
+  const longitude = -1.0539832
+  const latitude = 46.689520
+  const address = "L'Omnibus Bar-restaurant-pizzeria, 85110 Chantonnay"
 
   useEffect(() => {
     if (map.current) return // Initialize map only once

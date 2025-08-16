@@ -22,7 +22,6 @@ export function Menu() {
   const { badges } = useBadges()
   const [activeCategory, setActiveCategory] = useState(0)
   const [currentItemIndex, setCurrentItemIndex] = useState(0)
-  const [currentPageIndex, setCurrentPageIndex] = useState(1)
 
   console.log("[v0] Menu component - badges from hook:", badges)
   console.log("[v0] Menu component - categories:", categories)
@@ -63,6 +62,11 @@ export function Menu() {
   const totalItems = menuItems.length
 
   const itemsPerPage = 3
+  
+  // Calcul correct de la pagination
+  const totalPages = Math.max(1, totalItems - itemsPerPage + 1)
+  const currentPage = currentItemIndex + 1
+  
   const getCurrentItems = () => {
     if (totalItems <= itemsPerPage) {
       return menuItems
@@ -81,14 +85,12 @@ export function Menu() {
   const nextItem = () => {
     if (currentItemIndex < totalItems - itemsPerPage) {
       setCurrentItemIndex(currentItemIndex + 1)
-      setCurrentPageIndex(currentPageIndex + 1)
     }
   }
 
   const prevItem = () => {
     if (currentItemIndex > 0) {
       setCurrentItemIndex(currentItemIndex - 1)
-      setCurrentPageIndex(currentPageIndex - 1)
     }
   }
 
@@ -173,7 +175,7 @@ export function Menu() {
               </div>
 
               {totalItems > itemsPerPage && (
-                <div className="flex items-center justify-center gap-2">
+                <div className="hidden md:flex items-center justify-center gap-2">
                   <Button
                     variant="outline"
                     size="sm"
@@ -184,7 +186,7 @@ export function Menu() {
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <span className="text-sm text-gray-600 px-2">
-                    {Math.floor(currentPageIndex)} / {Math.ceil(totalItems / itemsPerPage)}
+                    {currentPage} / {totalPages}
                   </span>
                   <Button
                     variant="outline"
@@ -199,58 +201,118 @@ export function Menu() {
               )}
             </div>
 
-            {totalItems > 0 && currentItems.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {currentItems.map((item, index) => {
-                  console.log("[v0] Rendering item:", item.name, "with badges:", item.badges)
-                  const itemBadges = getItemBadges(item.badges)
+            {totalItems > 0 && menuItems.length > 0 ? (
+              <>
+                <div className="block md:hidden">
+                  {/* Version mobile avec scroll horizontal */}
+                  <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory">
+                    {menuItems.map((item, index) => {
+                      console.log("[v0] Rendering item:", item.name, "with badges:", item.badges)
+                      const itemBadges = getItemBadges(item.badges)
 
-                  return (
-                    <Card
-                      key={`${item.id}-${currentItemIndex}-${index}`}
-                      className={`bg-zinc-100 border-slate-300 hover:border-red-500 transition-colors shadow-lg hover:shadow-xl ${index === 0 ? "ring-2 ring-red-500" : ""}`}
-                    >
-                      <div className="relative">
-                        <img
-                          src={item.imageUrl || "/images/pizza-banner.png"}
-                          alt={item.name}
-                          className="w-full h-48 object-cover rounded-t-lg"
-                        />
-                        {itemBadges.length > 0 && (
-                          <div className="absolute top-2 left-2 flex flex-wrap gap-1">
-                            {itemBadges.map((badge) => (
-                              <span
-                                key={badge.id}
-                                className="px-2 py-1 text-xs font-medium rounded-full text-white shadow-sm"
-                                style={{ backgroundColor: badge.color }}
-                              >
-                                {badge.name}
-                              </span>
-                            ))}
+                      return (
+                        <Card
+                          key={item.id}
+                          className="bg-zinc-100 border-slate-300 hover:border-red-500 transition-colors shadow-lg hover:shadow-xl min-w-[220px] max-w-[220px] h-[320px] flex-shrink-0 snap-start flex flex-col"
+                        >
+                          <div className="relative flex-shrink-0">
+                            <img
+                              src={item.imageUrl || "/images/pizza-banner.png"}
+                              alt={item.name}
+                              className="w-full h-28 object-cover rounded-t-lg"
+                            />
+                            {itemBadges.length > 0 && (
+                              <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+                                {itemBadges.map((badge) => (
+                                  <span
+                                    key={badge.id}
+                                    className="px-2 py-1 text-xs font-medium rounded-full text-white shadow-sm"
+                                    style={{ backgroundColor: badge.color }}
+                                  >
+                                    {badge.name}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
                           </div>
-                        )}
-                      </div>
 
-                      <CardHeader className="p-4">
-                        <div className="flex justify-between items-start gap-2">
-                          <CardTitle className="text-slate-800 text-lg leading-tight">{item.name}</CardTitle>
-                          <span className="text-xl font-bold text-red-500 shrink-0">{formatPrice(item.price)}€</span>
+                          <CardHeader className="p-3 flex-shrink-0">
+                            <div className="flex justify-between items-start gap-2">
+                              <CardTitle className="text-slate-800 text-base leading-tight">{item.name}</CardTitle>
+                              <span className="text-lg font-bold text-red-500 shrink-0">{formatPrice(item.price)}€</span>
+                            </div>
+                          </CardHeader>
+
+                          <CardContent className="p-3 pt-0 flex-1 overflow-y-auto">
+                            <div className="space-y-2">
+                              <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
+
+                              {item.ingredients && item.ingredients.length > 0 && (
+                                <div>
+                                  <p className="text-xs text-slate-500 italic">{item.ingredients.join(", ")}</p>
+                                </div>
+                              )}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      )
+                    })}
+                  </div>
+                </div>
+                
+                <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {/* Version desktop avec pagination */}
+                  {currentItems.map((item, index) => {
+                    console.log("[v0] Rendering item:", item.name, "with badges:", item.badges)
+                    const itemBadges = getItemBadges(item.badges)
+
+                    return (
+                      <Card
+                        key={`${item.id}-${currentItemIndex}-${index}`}
+                        className={`bg-zinc-100 border-slate-300 hover:border-red-500 transition-colors shadow-lg hover:shadow-xl ${index === 0 ? "ring-2 ring-red-500" : ""}`}
+                      >
+                        <div className="relative">
+                          <img
+                            src={item.imageUrl || "/images/pizza-banner.png"}
+                            alt={item.name}
+                            className="w-full h-48 object-cover rounded-t-lg"
+                          />
+                          {itemBadges.length > 0 && (
+                            <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+                              {itemBadges.map((badge) => (
+                                <span
+                                  key={badge.id}
+                                  className="px-2 py-1 text-xs font-medium rounded-full text-white shadow-sm"
+                                  style={{ backgroundColor: badge.color }}
+                                >
+                                  {badge.name}
+                                </span>
+                              ))}
+                            </div>
+                          )}
                         </div>
-                      </CardHeader>
 
-                      <CardContent className="p-4 pt-0">
-                        <p className="text-slate-600 text-center leading-relaxed mb-3">{item.description}</p>
-
-                        {item.ingredients && item.ingredients.length > 0 && (
-                          <div className="text-center">
-                            <p className="text-sm text-slate-500 italic">{item.ingredients.join(", ")}</p>
+                        <CardHeader className="p-4">
+                          <div className="flex justify-between items-start gap-2">
+                            <CardTitle className="text-slate-800 text-lg leading-tight">{item.name}</CardTitle>
+                            <span className="text-xl font-bold text-red-500 shrink-0">{formatPrice(item.price)}€</span>
                           </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  )
-                })}
-              </div>
+                        </CardHeader>
+
+                        <CardContent className="p-4 pt-0">
+                          <p className="text-slate-600 text-center leading-relaxed mb-3">{item.description}</p>
+
+                          {item.ingredients && item.ingredients.length > 0 && (
+                            <div className="text-center">
+                              <p className="text-sm text-slate-500 italic">{item.ingredients.join(", ")}</p>
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    )
+                  })}
+                </div>
+              </>
             ) : (
               <div className="text-center py-12">
                 <p className="text-gray-600">Aucun plat disponible dans cette catégorie.</p>
