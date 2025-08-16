@@ -1,5 +1,5 @@
 import { collection, getDocs, doc, getDoc } from "firebase/firestore"
-import {db} from "./firebase"
+import { db } from "./firebase"
 
 // Types
 export interface MenuItem {
@@ -11,6 +11,7 @@ export interface MenuItem {
   imageUrl: string
   available: boolean
   category: string
+  badge?: string[] // Champ badge comme array de strings
 }
 
 export interface Category {
@@ -51,6 +52,13 @@ export interface VacationSettings {
   }>
 }
 
+export interface Badge {
+  id: string
+  name: string
+  color: string
+  active: boolean
+}
+
 // Fallback data
 const FALLBACK_CATEGORIES: Category[] = [
   {
@@ -62,12 +70,24 @@ const FALLBACK_CATEGORIES: Category[] = [
       {
         id: "margherita",
         name: "Margherita",
-        description: "Pizza classique",
+        description: "Pizza classique avec tomate, mozzarella et basilic frais",
         price: 12.5,
         ingredients: ["Tomate", "Mozzarella", "Basilic"],
         imageUrl: "/images/pizza-banner.png",
         available: true,
         category: "Pizzas du Moment",
+        badge: ["vegetarian", "local"], // Ajout de badges d'exemple
+      },
+      {
+        id: "4-fromages",
+        name: "4 Fromages",
+        description: "Pizza aux quatre fromages de notre région",
+        price: 14.5,
+        ingredients: ["Mozzarella", "Chèvre", "Roquefort", "Emmental"],
+        imageUrl: "/images/pizza-banner.png",
+        available: true,
+        category: "Pizzas du Moment",
+        badge: ["vegetarian", "local", "new_recipe"], // Exemple de badges multiples
       },
     ],
   },
@@ -276,4 +296,42 @@ export async function getActivePeriodReason(): Promise<string | null> {
   }
 
   return null
+}
+
+export async function getBadges(): Promise<Badge[]> {
+  console.log("[v0] Fetching badges from Firebase...")
+
+  if (!isFirebaseConfigured()) {
+    console.warn("Firebase not configured, using fallback badges")
+    return []
+  }
+
+  try {
+    console.log("[v0] Getting badges collection...")
+    const badgesRef = collection(db, "badges")
+    const badgesSnap = await getDocs(badgesRef)
+
+    console.log("[v0] Badges collection size:", badgesSnap.size)
+
+    const badges: Badge[] = []
+    badgesSnap.forEach((doc) => {
+      const data = doc.data()
+      console.log("[v0] Badge document:", doc.id, data)
+
+      if (data.active) {
+        badges.push({
+          id: doc.id,
+          name: data.name,
+          color: data.color,
+          active: data.active,
+        })
+      }
+    })
+
+    console.log("[v0] Active badges found:", badges)
+    return badges
+  } catch (error) {
+    console.error("Error fetching badges:", error)
+    return []
+  }
 }

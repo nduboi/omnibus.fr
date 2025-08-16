@@ -7,9 +7,10 @@ import {
   getVacationSettings,
   isCurrentlyOpen,
   isOnVacation,
-  getActivePeriodReason, // Ajout import pour la raison de période
+  getActivePeriodReason,
+  getBadges, // Ajout import pour getBadges
 } from "@/lib/firebase-service"
-import type { Category, OpeningHours, VacationSettings } from "@/lib/firebase-service"
+import type { Category, OpeningHours, VacationSettings, Badge } from "@/lib/firebase-service" // Ajout type Badge
 
 export function useCategories() {
   const [categories, setCategories] = useState<Category[]>([])
@@ -106,6 +107,32 @@ export function useVacations() {
     error,
     refetch: fetchVacations,
   }
+}
+
+export function useBadges() {
+  const [badges, setBadges] = useState<Badge[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  const fetchBadges = useCallback(async () => {
+    try {
+      setLoading(true)
+      const data = await getBadges()
+      setBadges(data)
+      setError(null)
+    } catch (err) {
+      setError("Erreur lors du chargement des badges")
+      console.error("Error fetching badges:", err)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchBadges()
+  }, [fetchBadges])
+
+  return { badges, loading, error, refetch: fetchBadges }
 }
 
 export function useRestaurantStatus() {
