@@ -10,44 +10,71 @@ const reviews = [
     rating: 5,
     comment:
       "Nous avons été super bien accueilli, le personnel est adorable. Restaurant adaptée avec un bébé. La cuisine est très bonne avec des produits de qualités qui viennent de commerçant du coin.Je recommande!",
-    date: "Il y a 1 mois",
+    publishedDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), // Il y a 1 mois
   },
   {
     name: "Laura Crine",
     rating: 5,
     comment:
       "Un perfect ! En grande maniaque du service bien fait ; voilà un établissement exemplaire. Le repas enfant servie très rapidement, l'apéritif, les plats ont suivis, on commande un verre, on nous le sers en quelques minutes, on finit la carafe d'eau on la change instantanément, on nous demande si ça va, sans camper à la table non plus, c'était juste parfait. Et en prime évidement, tout le monde s'est régalés, très bonnes pizzas, dommage qu'on habite à 500km car on serait venu plus souvent, en attendant, aux personnes qui me lisent, venez ! Merci et félicitation à cet établissement, à son gérant et à son équipe 🫶",
-    date: "Il y a 3 semaines",
+    publishedDate: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000), // Il y a 3 semaines
   },
   {
     name: "Amelie Tetaud",
     rating: 5,
     comment:
       "Belle découverte! On ne m'en disant que du bien et je confirme. Personnel sympa et plat (pizza) très bon. Je vous le recommande.",
-    date: "Il y a 1 semaine",
+    publishedDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // Il y a 1 semaine
   },
   {
     name: "Justine Motti",
     rating: 5,
     comment:
       "Nous sommes de la haute Marne nous sommes de passage et nous avons été conquis par ce restaurant. Amabilité, service rapide, gustativement parlant c'est très bon. Nous sommes souvent dans le coin nous y retournerons !",
-    date: "Il y a 1 semaine",
+    publishedDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // Il y a 1 semaine
   },
   {
     name: "Maxx Mc",
     rating: 5,
     comment:
       "Excellent !! Très bonne pizzeria bien située facile pour se garer au parking de la gare. Accueil irréprochable, service impeccable, carte délicieuse et pizza savoureuses. Que dire de plus ?! Juste très satisfaisant !",
-    date: "Il y a 2 mois",
+    publishedDate: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000), // Il y a 2 mois
   },
   {
     name: "Karine Mouchard",
     rating: 5,
     comment:
       "Moment très agréable, service parfait. Serveuse souriante et agréable. Apéro et tapas vraiment bon, ma pizza était excellente avec une pâte fine, au top 👍 Je reviendrais sans problème.",
-    date: "Il y a 2 ans",
+    publishedDate: new Date(Date.now() - 730 * 24 * 60 * 60 * 1000), // Il y a 2 ans
   },
 ]
+
+function getTimeAgo(publishedDate: Date): string {
+  const now = new Date()
+  const diffInMs = now.getTime() - publishedDate.getTime()
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24))
+
+  if (diffInDays < 1) {
+    return "Aujourd'hui"
+  } else if (diffInDays === 1) {
+    return "Il y a 1 jour"
+  } else if (diffInDays < 7) {
+    return `Il y a ${diffInDays} jours`
+  } else if (diffInDays < 14) {
+    return "Il y a 1 semaine"
+  } else if (diffInDays < 30) {
+    const weeks = Math.floor(diffInDays / 7)
+    return `Il y a ${weeks} semaine${weeks > 1 ? "s" : ""}`
+  } else if (diffInDays < 60) {
+    return "Il y a 1 mois"
+  } else if (diffInDays < 365) {
+    const months = Math.floor(diffInDays / 30)
+    return `Il y a ${months} mois`
+  } else {
+    const years = Math.floor(diffInDays / 365)
+    return `Il y a ${years} an${years > 1 ? "s" : ""}`
+  }
+}
 
 function ReviewCard({ review, index }: { review: (typeof reviews)[0]; index: number }) {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -84,7 +111,7 @@ function ReviewCard({ review, index }: { review: (typeof reviews)[0]; index: num
                 </button>
               )}
             </p>
-            <p className="text-sm text-card-foreground/60">{review.date}</p>
+            <p className="text-sm text-card-foreground/60">{getTimeAgo(review.publishedDate)}</p>
           </div>
         </div>
       </CardContent>
@@ -93,7 +120,8 @@ function ReviewCard({ review, index }: { review: (typeof reviews)[0]; index: num
 }
 
 export function Reviews() {
-  const averageRating = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
+  const displayRating = 4.7
+  const totalReviews = 776
 
   return (
     <section id="reviews" className="py-16 bg-background">
@@ -105,12 +133,12 @@ export function Reviews() {
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star
                   key={star}
-                  className={`h-6 w-6 ${star <= averageRating ? "text-yellow-400 fill-current" : "text-gray-300"}`}
+                  className={`h-6 w-6 ${star <= displayRating ? "text-yellow-400 fill-current" : "text-gray-300"}`}
                 />
               ))}
             </div>
-            <span className="text-xl font-semibold text-foreground">{averageRating.toFixed(1)}/5</span>
-            <span className="text-foreground/60">({reviews.length} avis)</span>
+            <span className="text-xl font-semibold text-foreground">{displayRating}/5</span>
+            <span className="text-foreground/60">(+{totalReviews} avis)</span>
           </div>
           <p className="text-xl text-foreground/80">Découvrez ce que nos clients pensent de L&apos;ombinus</p>
         </div>
