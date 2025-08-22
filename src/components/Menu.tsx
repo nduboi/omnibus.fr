@@ -140,9 +140,7 @@ export function Menu() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-[#121619] mb-4">Notre Menu</h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
-            {getCategoryDescription(currentCategory.name)}
-          </p>
+          <p className="menu-description text-lg md:text-xl text-gray-600 mx-auto px-4" dangerouslySetInnerHTML={{ __html: currentCategory.description || '' }} />
         </div>
 
         <div className="flex flex-col gap-6 md:gap-8">
@@ -158,7 +156,7 @@ export function Menu() {
                     ${
                       activeCategory === index
                         ? "bg-red-500 text-white hover:bg-red-600 shadow-lg"
-                        : "bg-white text-[#121619] border-2 border-gray-300 hover:border-red-500 hover:text-red-500"
+                        : "bg-white text-[#121619] border-2 border-gray-300 hover:border-red-500 hover:text-neutral-100"
                     }
                   `}
                 >
