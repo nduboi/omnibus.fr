@@ -17,6 +17,7 @@ export interface MenuItem {
 export interface Category {
   id: string
   name: string
+  description: string | null
   active: boolean
   order: number
   menuItems: MenuItem[]
@@ -65,6 +66,7 @@ const FALLBACK_CATEGORIES: Category[] = [
     id: "pizzas",
     name: "Pizzas du Moment",
     active: true,
+    description: "Les Pizzas du Moment",
     order: 0,
     menuItems: [
       {
@@ -153,6 +155,7 @@ export async function getCategories(): Promise<Category[]> {
           active: data.active,
           order: data.order,
           menuItems: categoryMenuItems,
+          description: data.description || null,
         })
       }
     })

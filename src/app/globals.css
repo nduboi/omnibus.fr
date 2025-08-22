@@ -189,3 +189,26 @@
     scroll-snap-align: start;
   }
 }
+
+/* Correction des retours à la ligne sur la description de catégorie */
+.menu-description {
+  white-space: pre-line;
+}
+.menu-description b,
+.menu-description strong,
+.menu-description i,
+.menu-description em {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+.menu-description b,
+.menu-description strong {
+  font-weight: bold;
+  font-style: normal;
+}
+.menu-description i,
+.menu-description em {
+  font-style: italic;
+  font-weight: normal;
+}
