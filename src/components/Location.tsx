@@ -179,9 +179,6 @@ export function Location() {
                     <strong>Voiture :</strong> Parking gratuit disponible
                   </p>
                   <p>
-                    <strong>Train :</strong> Gare SNCF de Chantonnay à proximité
-                  </p>
-                  <p>
                     <strong>Centre-ville :</strong> À 2 minutes à pied
                   </p>
                 </div>

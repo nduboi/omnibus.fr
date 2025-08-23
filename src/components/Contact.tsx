@@ -65,13 +65,15 @@ export function Contact() {
                     Facebook
                   </Button>
                 </a>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
-                >
-                  Instagram
-                </Button>
+                <a href="https://www.instagram.com/lomnibus85/" target="_blank" rel="noopener noreferrer">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+                  >
+                    Instagram
+                  </Button>
+                </a>
               </div>
             </CardContent>
           </Card>

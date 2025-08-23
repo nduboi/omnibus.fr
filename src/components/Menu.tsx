@@ -23,9 +23,6 @@ export function Menu() {
   const [activeCategory, setActiveCategory] = useState(0)
   const [currentItemIndex, setCurrentItemIndex] = useState(0)
 
-  console.log("[v0] Menu component - badges from hook:", badges)
-  console.log("[v0] Menu component - categories:", categories)
-
   if (loading) {
     return (
       <section id="menu" className="py-8 md:py-16 bg-white">

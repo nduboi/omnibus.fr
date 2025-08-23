@@ -48,10 +48,20 @@ export function Footer() {
               >
                 Facebook
               </a>
-              <a href="#" className="text-foreground/60 hover:text-primary transition-colors">
+              <a
+                href="https://www.instagram.com/lomnibus85/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground/60 hover:text-primary transition-colors"
+              >
                 Instagram
               </a>
-              <a href="#" className="text-foreground/60 hover:text-primary transition-colors">
+              <a
+                href="https://www.tripadvisor.fr/Restaurant_Review-g672996-d19786985-Reviews-L_Omnibus-Chantonnay_Vendee_Pays_de_la_Loire.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground/60 hover:text-primary transition-colors"
+              >
                 TripAdvisor
               </a>
             </div>
