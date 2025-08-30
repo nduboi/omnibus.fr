@@ -37,7 +37,7 @@ export default function LegalPage() {
           <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Hébergement</h2>
           <p>
             Le code source de ce site est hébergé et déployé via <strong>GitHub Pages</strong>.  
-            L’hébergement et la gestion du dépôt se font par GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA.
+            L&apos;hébergement et la gestion du dépôt se font par GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA.
           </p>
         </section>
 
@@ -54,7 +54,7 @@ export default function LegalPage() {
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Responsabilité</h2>
           <p>
-            L’OMNIBUS ne saurait être tenu responsable des dommages directs ou indirects pouvant résulter de l’accès ou de l’utilisation de ce site.  
+            L&apos;OMNIBUS ne saurait être tenu responsable des dommages directs ou indirects pouvant résulter de l&apos;accès ou de l&apos;utilisation de ce site.  
             Les informations fournies sont à titre indicatif et peuvent être modifiées sans préavis.
           </p>
         </section>
@@ -67,10 +67,10 @@ export default function LegalPage() {
           </p>
           <ul className="list-disc list-inside space-y-1">
             <li><strong>Firebase (Google LLC)</strong> pour la gestion de certaines données via Firestore Database.</li>
-            <li><strong>Mapbox</strong> pour l’affichage de cartes interactives.</li>
+            <li><strong>Mapbox</strong> pour l&apos;affichage de cartes interactives.</li>
           </ul>
           <p>
-            Pour plus d’informations, veuillez consulter les politiques de confidentialité des services tiers :
+            Pour plus d&apos;informations, veuillez consulter les politiques de confidentialité des services tiers :
             <br />
             <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">Politique Google</a> |  
             <a href="https://www.mapbox.com/legal/privacy" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline ml-2">Politique Mapbox</a>
