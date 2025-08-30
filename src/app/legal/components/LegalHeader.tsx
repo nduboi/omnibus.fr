@@ -14,7 +14,7 @@ export function LegalHeader() {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo + Titre */}
         <div className="flex items-center gap-3">
-          <img src="/images/logo-complete.png" alt="L'Omnibus Logo" className="h-16 w-16 object-contain" />
+          <img src="/images/logo-complete.png" alt="L&apos;Omnibus Logo" className="h-16 w-16 object-contain" />
           <h1 className="text-xl md:text-2xl font-bold text-[var(--foreground)]">Mentions légales</h1>
         </div>
 

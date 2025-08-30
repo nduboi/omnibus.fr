@@ -14,7 +14,7 @@ export default function PrivacyPage() {
 
       <main className="max-w-3xl mx-auto p-6 md:p-12 bg-[var(--card)] rounded-[var(--radius)] shadow-lg mt-6 md:mt-12">
         <p className="mb-6">
-          La présente politique de confidentialité décrit la manière dont nous collectons, utilisons et protégeons vos informations lors de l&apos;utilisation de notre site Internet <strong>L'Omnibus Bar-Restaurant-Pizzeria</strong>.
+          La présente politique de confidentialité décrit la manière dont nous collectons, utilisons et protégeons vos informations lors de l&apos;utilisation de notre site Internet <strong>L&apos;Omnibus Bar-Restaurant-Pizzeria</strong>.
         </p>
 
         <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Utilisation de services tiers</h2>
@@ -57,7 +57,7 @@ export default function PrivacyPage() {
       </main>
 
       <footer className="text-center py-6 mt-12 text-[var(--muted)]">
-        &copy; 2025 L'Omnibus – Politique de confidentialité
+        &copy; 2025 L&apos;Omnibus – Politique de confidentialité
       </footer>
     </div>
   )

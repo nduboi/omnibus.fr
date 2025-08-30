@@ -19,7 +19,7 @@ export default function LegalPage() {
         {/* Éditeur */}
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Éditeur du site</h2>
-          <p><strong>Nom :</strong> L'OMNIBUS</p>
+          <p><strong>Nom :</strong> L&apos;OMNIBUS</p>
           <p><strong>Forme juridique :</strong> Société à responsabilité limitée (SARL)</p>
           <p><strong>SIREN :</strong> 851 207 704</p>
           <p><strong>SIRET :</strong> 851 207 704 00012</p>
@@ -37,7 +37,7 @@ export default function LegalPage() {
           <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Hébergement</h2>
           <p>
             Le code source de ce site est hébergé et déployé via <strong>GitHub Pages</strong>.  
-            L&apos;hébergement et la gestion du dépôt se font par GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA.
+            L&apos;apos;hébergement et la gestion du dépôt se font par GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA.
           </p>
         </section>
 
@@ -45,7 +45,7 @@ export default function LegalPage() {
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Propriété intellectuelle</h2>
           <p>
-            Tous les contenus présents sur ce site (textes, images, logos, design, code) sont la propriété exclusive de L'OMNIBUS ou de leurs auteurs respectifs.  
+            Tous les contenus présents sur ce site (textes, images, logos, design, code) sont la propriété exclusive de L&apos;OMNIBUS ou de leurs auteurs respectifs.  
             Toute reproduction, modification, distribution ou utilisation sans autorisation est strictement interdite.
           </p>
         </section>
@@ -54,7 +54,7 @@ export default function LegalPage() {
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Responsabilité</h2>
           <p>
-            L&apos;OMNIBUS ne saurait être tenu responsable des dommages directs ou indirects pouvant résulter de l&apos;accès ou de l&apos;utilisation de ce site.  
+            L&apos;apos;OMNIBUS ne saurait être tenu responsable des dommages directs ou indirects pouvant résulter de l&apos;accès ou de l&apos;utilisation de ce site.  
             Les informations fournies sont à titre indicatif et peuvent être modifiées sans préavis.
           </p>
         </section>
@@ -79,7 +79,7 @@ export default function LegalPage() {
       </main>
 
       <footer className="text-center py-6 mt-12 text-[var(--muted)]">
-        &copy; 2025 L'OMNIBUS – Mentions légales
+        &copy; 2025 L&apos;OMNIBUS – Mentions légales
       </footer>
     </div>
   )
