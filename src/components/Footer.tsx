@@ -115,11 +115,11 @@ export function Footer() {
         <div className="border-t border-primary/20 mt-8 pt-8 text-center">
           <p className="text-foreground/60">
             © 2024 Pizzeria L&apos;ombinus. Tous droits réservés. |
-            <a href="#" className="hover:text-primary transition-colors ml-1">
+            <a href="/legal" className="hover:text-primary transition-colors ml-1">
               Mentions légales
             </a>{" "}
             |
-            <a href="#" className="hover:text-primary transition-colors ml-1">
+            <a href="/privacy" className="hover:text-primary transition-colors ml-1">
               Politique de confidentialité
             </a>
           </p>
