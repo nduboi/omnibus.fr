@@ -18,7 +18,7 @@ export default function Watermark() {
         pointer-events-none
       "
     >
-      Version d&apos;évaluation – ne pas publier
+      Version d&apos;évaluation – Ne pas publier
     </div>
   );
 }
