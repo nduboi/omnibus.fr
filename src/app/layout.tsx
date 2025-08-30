@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import Watermark from "@/components/Watermark";
 import { Geist, Geist_Mono, Bowlby_One } from "next/font/google";
 import "./globals.css";
 
@@ -52,6 +53,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${bowlbyOne.variable} antialiased`}
       >
         {children}
+        <Watermark />
       </body>
     </html>
   );
