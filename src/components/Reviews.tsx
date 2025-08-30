@@ -153,7 +153,7 @@ export function Reviews() {
           <p className="text-foreground/80 mb-4">Vous avez dîné chez nous ? Partagez votre expérience !</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://www.google.com/maps"
+              href="https://www.google.com/search?sca_esv=3768679dafddd1ea&biw=1920&bih=904&sxsrf=AE3TifOp09iN57RbbRnpIQmy3N_k5J65mg:1756538390016&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E8l_h5y_AC2HulxJtofDmgQsxrv2q7LwS6pY3Zg_oB5cyKSLt9QLnv1fsE1p78aEORrX-_XsG-lL-DdjJ-K_6pufxj4OTmiuo0nFqXHW9HENSO3rkQ%3D%3D&q=L%27Omnibus+Bar-restaurant-pizzeria+Avis&sa=X&ved=2ahUKEwigwJW2_7GPAxXLVKQEHX9bPIUQ0bkNegQILhAE"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
@@ -161,7 +161,7 @@ export function Reviews() {
               Laisser un avis Google
             </a>
             <a
-              href="https://www.tripadvisor.fr"
+              href="https://www.tripadvisor.fr/Restaurant_Review-g672996-d19786985-Reviews-L_Omnibus-Chantonnay_Vendee_Pays_de_la_Loire.html"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors"
