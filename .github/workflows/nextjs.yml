@@ -36,7 +36,8 @@ jobs:
       NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
       NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
       NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
-    steps:
+      NEXT_PUBLIC_SHOW_WATERMARK: ${{ secrets.NEXT_PUBLIC_SHOW_WATERMARK }}
+  steps:
       - name: checkToken
         run: |
           if [ -z "${{ secrets.NEXT_PUBLIC_MAPBOX_TOKEN }}" ]; then
