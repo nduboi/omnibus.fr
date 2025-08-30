@@ -84,7 +84,7 @@ function ReviewCard({ review, index }: { review: (typeof reviews)[0]; index: num
   const displayComment = shouldTruncate && !isExpanded ? review.comment.slice(0, maxLength) + "..." : review.comment
 
   return (
-    <Card key={index} className="bg-card border-primary/20">
+    <Card key={index} className="bg-card border-primary/20 py-0 items-center">
       <CardContent className="p-6">
         <div className="flex items-start gap-3 mb-4">
           <Quote className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
@@ -111,7 +111,7 @@ function ReviewCard({ review, index }: { review: (typeof reviews)[0]; index: num
                 </button>
               )}
             </p>
-            <p className="text-sm text-card-foreground/60">{getTimeAgo(review.publishedDate)}</p>
+            {/* <p className="text-sm text-card-foreground/60">{getTimeAgo(review.publishedDate)}</p> */}
           </div>
         </div>
       </CardContent>
