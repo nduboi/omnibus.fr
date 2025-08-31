@@ -11,17 +11,21 @@ self.addEventListener('install', (event) => {
   console.log('[SW] Installing service worker...');
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(OFFLINE_ASSETS).then(() => {
-        console.log('[SW] Offline assets cached!');
-      }).catch((err) => {
-        console.warn('[SW] Some assets failed to cache, but continuing...', err);
-      });
+    caches.open(CACHE_NAME).then(async (cache) => {
+      for (let i = 0; i < OFFLINE_ASSETS.length; i++) {
+        const url = OFFLINE_ASSETS[i];
+        try {
+          await cache.add(url);
+          console.log(`[SW] Cached: ${url}`);
+        } catch (err) {
+          console.warn(`[SW] Failed to cache ${url}:`, err);
+        }
+      }
+      console.log('[SW] All offline assets processed.');
     })
   );
 });
 
-// Activer le SW et supprimer les anciens caches
 self.addEventListener('activate', (event) => {
   console.log('[SW] Activating new service worker...');
   event.waitUntil(
@@ -41,11 +45,8 @@ self.addEventListener('fetch', (event) => {
     fetch(event.request)
       .then((response) => response)
       .catch(async () => {
-        // Vérifie si la requête est en cache
         const cached = await caches.match(event.request);
         if (cached) return cached;
-
-        // Sinon, renvoie offline
         return caches.match('/offline/');
       })
   );
