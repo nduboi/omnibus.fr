@@ -23,6 +23,7 @@ const bowlbyOne = Bowlby_One({
 export const metadata: Metadata = {
   title: "L'omnibus",
   description: "Bienvenu(e) à l'omnibus, bar-restaurant-pizzeria à Chantonnay, France. Découvrez notre menu, réservez une table et contactez-nous.",
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({
