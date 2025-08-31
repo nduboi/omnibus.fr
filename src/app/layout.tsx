@@ -21,11 +21,8 @@ const bowlbyOne = Bowlby_One({
 });
 
 export const metadata: Metadata = {
-  title: "Omnibus",
-  description: "Bienvenu(e) à l'Omnibus",
-  icons: {
-    icon: "/favicon.ico?favicon.48e434e3.ico",
-  },
+  title: "L'omnibus",
+  description: "Bienvenu(e) à l'omnibus, bar-restaurant-pizzeria à Chantonnay, France. Découvrez notre menu, réservez une table et contactez-nous.",
 };
 
 export default function RootLayout({
@@ -36,6 +33,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
+        <meta name="apple-mobile-web-app-title" content="L'omnibus" />
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-F4PW7S6YSX"
