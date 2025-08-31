@@ -4,6 +4,7 @@ import Watermark from "@/components/Watermark";
 import { Geist, Geist_Mono, Bowlby_One } from "next/font/google";
 import "./globals.css";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,10 +32,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="fr">
       <head>
         <meta name="apple-mobile-web-app-title" content="L'omnibus" />
+        <Script id="serviceWorker">
+            {`
+              if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw-custom.js')
+                  .then((reg) => console.log('Service Worker registered:', reg))
+                  .catch((err) => console.log('Service Worker registration failed:', err));
+              }
+            `}
+        </Script>
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-F4PW7S6YSX"

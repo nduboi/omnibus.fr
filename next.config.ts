@@ -6,16 +6,13 @@ const nextConfig: NextConfig = {
     images: {
         unoptimized: true,
         remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: '**',
-            },
-            {
-                protocol: 'http',
-                hostname: '**',
-            },
+            { protocol: 'https', hostname: '**' },
+            { protocol: 'http',  hostname: '**' },
         ],
-    }
+    },
+    turbopack: {
+
+    },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

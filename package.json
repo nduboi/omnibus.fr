@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "lint": "next lint",
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "next-static-cache": "node scripts/next-static-cache.js",
+    "build": "next build && npm run next-static-cache",
     "start": "npx serve@latest out",
     "deploy": "npm run build && npm run start",
-    "lint": "next lint",
     "serve": "npx serve@latest out",
     "preview": "npm run build && npm run serve"
-
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
