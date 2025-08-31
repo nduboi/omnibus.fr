@@ -92,7 +92,7 @@ jobs:
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Generate cache files
-        run: ${{ steps.detect-package-manager.outputs.runner }} node scripts/next-static-cache.js && mv public/sw-assets.json out/sw-assets.json
+        run: node scripts/next-static-cache.js && mv public/sw-assets.json out/sw-assets.json
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
