@@ -1,6 +1,6 @@
 const CACHE_NAME = 'offline-cache-v1';
 const OFFLINE_ASSETS = [
-  '/offline/',
+  '/offline.html',
   '/images/logo-complete.png',
   '/manifest.webmanifest',
   '/sw-assets.json'
@@ -12,7 +12,6 @@ self.addEventListener('install', (event) => {
 
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
-      // 1️⃣ Cacher les assets classiques
       for (let i = 0; i < OFFLINE_ASSETS.length; i++) {
         const url = OFFLINE_ASSETS[i];
         try {
