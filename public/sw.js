@@ -65,7 +65,7 @@ self.addEventListener('fetch', (event) => {
       .catch(async () => {
         const cached = await caches.match(event.request);
         if (cached) return cached;
-        return caches.match('/offline/');
+        return caches.match('/offline.html');
       })
   );
 });
