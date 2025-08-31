@@ -6,22 +6,42 @@ const OFFLINE_ASSETS = [
   '/sw-assets.json'
 ];
 
-// Installer le SW et mettre en cache les assets sûrs
 self.addEventListener('install', (event) => {
   console.log('[SW] Installing service worker...');
   self.skipWaiting();
+
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
+      // 1️⃣ Cacher les assets classiques
       for (let i = 0; i < OFFLINE_ASSETS.length; i++) {
         const url = OFFLINE_ASSETS[i];
         try {
           await cache.add(url);
-          console.log(`[SW] Cached: ${url}`);
+          console.log(`[SW] Cached offline asset: ${url}`);
         } catch (err) {
-          console.warn(`[SW] Failed to cache ${url}:`, err);
+          console.warn(`[SW] Failed to cache offline asset ${url}:`, err);
         }
       }
-      console.log('[SW] All offline assets processed.');
+
+      // 2️⃣ Cacher les assets dynamiques listés dans sw-assets.json
+      try {
+        const res = await fetch('/sw-assets.json');
+        const dynamicAssets = await res.json();
+
+        for (let i = 0; i < dynamicAssets.length; i++) {
+          const url = dynamicAssets[i];
+          try {
+            await cache.add(url);
+            console.log(`[SW] Cached dynamic asset: ${url}`);
+          } catch (err) {
+            console.warn(`[SW] Failed to cache dynamic asset ${url}:`, err);
+          }
+        }
+      } catch (err) {
+        console.error('[SW] Failed to load sw-assets.json:', err);
+      }
+
+      console.log('[SW] All assets processed.');
     })
   );
 });
@@ -37,7 +57,6 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Intercepter les requêtes
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
