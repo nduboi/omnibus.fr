@@ -35,14 +35,15 @@ export function Hero() {
           >
             Découvrir notre menu
           </Button>
+          <a href="tel:+33123456789">
           <Button
             variant="outline"
             size="lg"
             className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-6 md:px-8 py-3 md:py-4 text-base md:text-lg bg-transparent w-full sm:w-auto"
-            onClick={() => window.open("tel:+33123456789")}
           >
             Nous appeler
           </Button>
+          </a>
         </div>
       </div>
     </section>

@@ -37,15 +37,17 @@ export default function RootLayout({
     <html lang="fr">
       <head>
         <meta name="apple-mobile-web-app-title" content="L'omnibus" />
-        <Script id="serviceWorker">
-            {`
-              if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/sw.js')
-                  .then((reg) => console.log('Service Worker registered:', reg))
-                  .catch((err) => console.log('Service Worker registration failed:', err));
-              }
-            `}
-        </Script>
+        {process.env.NODE_ENV !== "development"} : {
+          <Script id="serviceWorker">
+              {`
+                if ('serviceWorker' in navigator) {
+                  navigator.serviceWorker.register('/sw.js')
+                    .then((reg) => console.log('Service Worker registered:', reg))
+                    .catch((err) => console.log('Service Worker registration failed:', err));
+                }
+              `}
+          </Script>
+        }
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-F4PW7S6YSX"
