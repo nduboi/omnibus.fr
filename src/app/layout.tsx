@@ -37,6 +37,7 @@ export default function RootLayout({
     <html lang="fr">
       <head>
         <meta name="apple-mobile-web-app-title" content="L'omnibus" />
+        <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v23.0&appId=473134417440890"></script>
         {process.env.NODE_ENV !== "development"} : {
           <Script id="serviceWorker">
               {`

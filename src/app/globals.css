@@ -194,6 +194,9 @@
 .menu-description {
   white-space: pre-line;
 }
+.gtx-trans, #gtx-trans {
+  display: none !important;
+}
 .menu-description b,
 .menu-description strong,
 .menu-description i,
