@@ -32,10 +32,12 @@ export function Footer() {
                   <AlertTriangle className="h-4 w-4 text-yellow-600" />
                   <span className="text-yellow-800 font-medium text-sm">{currentVacation.reason}</span>
                 </div>
-                <p className="text-yellow-700 text-xs mt-1">
-                  Du {new Date(currentVacation.startDate).toLocaleDateString("fr-FR")} au{" "}
-                  {new Date(currentVacation.endDate).toLocaleDateString("fr-FR")}
-                </p>
+                {currentVacation.startDate !== "" && currentVacation.endDate !== "" && (
+                  <p className="text-yellow-700 text-xs mt-1">
+                    Du {new Date(currentVacation.startDate).toLocaleDateString("fr-FR")} au{" "}
+                    {new Date(currentVacation.endDate).toLocaleDateString("fr-FR")}
+                  </p>
+                )}
               </div>
             )}
 
@@ -103,7 +105,9 @@ export function Footer() {
               <div className="text-center py-4">
                 <p className="text-red-500 font-medium">Fermé pour vacances</p>
                 <p className="text-foreground/60 text-sm mt-1">
-                  Retour le {new Date(currentVacation?.endDate || "").toLocaleDateString("fr-FR")}
+                  {currentVacation?.endDate && (
+                    `Retour le ${new Date(currentVacation?.endDate || "").toLocaleDateString("fr-FR")}`
+                  )}
                 </p>
               </div>
             ) : (
