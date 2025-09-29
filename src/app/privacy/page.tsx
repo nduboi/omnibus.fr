@@ -52,7 +52,7 @@ export default function PrivacyPage() {
           <li>Droit d&apos;opposition</li>
         </ul>
         <p>
-          Pour exercer ces droits, vous pouvez nous contacter à l&apos;adresse suivante : <a href="mailto:contact@lomnibus.fr" className="text-[var(--accent)] hover:underline">contact@lomnibus.fr</a>.
+          Pour exercer ces droits, vous pouvez nous contacter à l&apos;adresse suivante : <a href="mailto:admin@nduboi.fr" className="text-[var(--accent)] hover:underline">admin@nduboi.fr</a>.
         </p>
       </main>
 
